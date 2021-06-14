@@ -1,5 +1,6 @@
 import cv2
 
+# path
 cap = cv2.VideoCapture("highway.mp4")
 obj_detector = cv2.createBackgroundSubtractorMOG2(history=100, varThreshold=40)
 
@@ -20,12 +21,14 @@ while True:
         area = cv2.contourArea(cnt)
         if area > 90:
             #cv2.drawContours(roi, [cnt], -1, (0, 255, 0), 2)
+            # drawing the box
             x, y, w, h = cv2.boundingRect(cnt)
             cv2.rectangle(roi, (x, y), (x + w, y + h), (0, 0, 255), 1)
 
     cv2.imshow("roi", roi)
     cv2.imshow("Frame", frame)
 
+    # KeyboardInterrupt event thing
     key = cv2.waitKey(30)
     if key == 27:
         break
